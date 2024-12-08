@@ -1,16 +1,21 @@
 const autocannon = require('autocannon');
 
-const url = 'http://localhost:3000';
+
+const urls = ['http://localhost:3000','http://localhost:3000/reqTwo'];
 const duration = 30;
 
-const instance = autocannon({
-    url,duration
-}, (err,result) =>{
-    if(err){
-        console.log('Error',err);
-    }else {
-        console.log('Result',result);
-    }
+urls.forEach(url => {
+    const instance = autocannon({
+        url,duration
+    }, (err,result) =>{
+        if(err){
+            console.log('Error',err);
+        }else {
+            console.log('URL: ',url)
+            console.log('No of request: ',result.requests.total);
+            console.log('Duration (second): ',result.duration);
+        }
+    });
+    
+    autocannon.track(instance);
 });
-
-autocannon.track(instance);

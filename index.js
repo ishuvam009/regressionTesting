@@ -5,7 +5,17 @@ const app = express();
 app.use(morgan('dev'));
 
 app.get('/',(req,res) =>{
+    
+    for (let i = 0; i < 100000000 ; i++){
+    }
     res.send('Hello from server.');
+})
+
+app.get('/reqTwo',(req,res) =>{
+    
+    for(let i = 0; i < 100000000; i++){
+    }
+    res.send('Hello from server 2.');
 })
 
 app.listen(3000,()=> {
