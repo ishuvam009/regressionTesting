@@ -6,7 +6,7 @@ app.use(morgan('dev'));
 
 app.get('/',(req,res) =>{
     
-    for (let i = 0; i < 100000000 ; i++){
+    for (let i = 0; i < 100000000; i++){
     }
     res.send('Hello from server.');
 })
@@ -18,6 +18,6 @@ app.get('/reqTwo',(req,res) =>{
     res.send('Hello from server 2.');
 })
 
-app.listen(4000,()=> {
+app.listen(3000,()=> {
     console.log('Server is running at port 3000.');
 });

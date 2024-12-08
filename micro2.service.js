@@ -1,16 +1,37 @@
 const express = require('express');
 const morgan = require('morgan');
+const cluster = require('cluster');
+const os = require('os');
 
-const app = express();
-app.use(morgan('dev'));
+const numCPUs = os.cpus().length;
 
-app.get('/',(req,res)=>{
-    for(let i = 0; i <= 100000000; i++){
+if (cluster.isMaster) {
+    console.log(`Master process ${process.pid} is running`);
+    console.log(`Forking ${numCPUs} workers....`);
+
+    // Fork workers for each CPU core
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
     }
 
-    res.send('Hello from server 2.');
-})
+    // Listen for dying workers and replace them
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`Worker ${worker.process.pid} died`);
+        console.log('Starting a new worker');
+        cluster.fork();
+    });
+} else {
+    const app = express();
+    app.use(morgan('dev'));
 
-app.listen(3001,()=>{
-    console.log('App is running at port 3001.');
-})
+    app.get('/', (req, res) => {
+        for (let i = 0; i <= 100000000; i++) {
+            // Simulating delay
+        }
+        res.send(`Hello from worker ${process.pid}`);
+    });
+
+    app.listen(3001, () => {
+        console.log(`Worker ${process.pid} started`);
+    });
+}
