@@ -12,6 +12,7 @@
   "dependencies": {
     "autocannon": "^8.0.0",
     "express": "^4.21.2",
+    "express-http-proxy": "^2.1.1",
     "morgan": "^1.10.0"
   }
 }

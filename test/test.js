@@ -1,7 +1,7 @@
 const autocannon = require('autocannon');
 
 
-const urls = ['http://localhost:3000','http://localhost:3000/reqTwo'];
+const urls = ['http://localhost:4000','http://localhost:4000/reqTwo'];
 const duration = 30;
 
 urls.forEach(url => {

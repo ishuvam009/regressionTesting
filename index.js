@@ -18,6 +18,6 @@ app.get('/reqTwo',(req,res) =>{
     res.send('Hello from server 2.');
 })
 
-app.listen(3000,()=> {
+app.listen(4000,()=> {
     console.log('Server is running at port 3000.');
 });
