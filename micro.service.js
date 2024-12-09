@@ -25,9 +25,9 @@ if (cluster.isMaster) {
     app.use(morgan('dev'));
 
     app.get('/', (req, res) => {
-        for (let i = 0; i <= 100000000; i++) {
-            // Simulating delay
-        }
+        // for (let i = 0; i <= 100; i++) {
+        //     // Simulating delay
+        // }
         res.send(`Hello from worker ${process.pid}`);
     });
 
